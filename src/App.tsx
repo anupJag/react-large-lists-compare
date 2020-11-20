@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Switch, Route } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import GlobalHeader from "./components/molecules/globalHeader/";
+import Root from "./components/pages/root";
+
+const NormalLoad = React.lazy(() => import("./components/pages/normalLoad"));
+const EffectiveLoad = React.lazy(
+  () => import("./components/pages/effectiveLoad")
+);
+const NormalLoadPaged = React.lazy(
+  () => import("./components/pages/normalLoadWithPaged")
+);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <CssBaseline />
+      <Grid container direction="column">
+        <Grid item component="header">
+          <GlobalHeader />
+        </Grid>
+        <Grid item container>
+          <Container fixed>
+            <Suspense fallback={<div>Setting Up....</div>}>
+              <Switch>
+                <Route path="/" component={Root} exact />
+                <Route path="/normal" component={NormalLoad} />
+                <Route path="/effective" component={EffectiveLoad} />
+                <Route path="/normalPaged" component={NormalLoadPaged} />
+              </Switch>
+            </Suspense>
+          </Container>
+        </Grid>
+      </Grid>
+    </React.Fragment>
   );
 }
 

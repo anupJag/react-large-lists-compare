@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# ISSUE WITH TSCONFIG.. DELETE IT AND RUN `yarn start` OR `npm run start`
+referene [Create React App Issue Scaffolding with TS](https://github.com/facebook/create-react-app/issues/9868)
+
 ## Available Scripts
 
 In the project directory, you can run:
